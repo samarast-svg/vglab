@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Genetics Lab</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">🧬</div>
+    <div>
+        <h1>Virtual Genetics Lab</h1>
+        <p class="subtitle">Εικονικό Εργαστήριο Γενετικής σύμφωνα με τους νόμους του Mendel</p>
+    </div>
+</header>
+
+<main>
+
+    <section class="mode-selector panel">
+        <h2>Επιλογή τύπου διασταύρωσης</h2>
+        <div class="mode-buttons">
+            <button id="modeMonohybridButton" type="button" class="mode-button active">
+                Μονοϋβριδισμός
+            </button>
+            <button id="modeDihybridButton" type="button" class="mode-button">
+                Διϋβριδισμός
+            </button>
+        </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- ΜΟΝΟΫΒΡΙΔΙΣΜΟΣ -->
+    <!-- ===================================================== -->
+    <section id="monohybridPanel" class="mode-panel">
+
+        <section class="panel">
+            <h2>Μονοϋβριδική διασταύρωση</h2>
+            <label for="traitSelect">Επιλογή χαρακτηριστικού</label>
+            <select id="traitSelect">
+                <option value="">-- Επιλέξτε χαρακτήρα --</option>
+            </select>
+        </section>
+
+        <section class="panel">
+            <h2>Πληροφορίες</h2>
+            <div id="traitInfo">Επιλέξτε έναν χαρακτήρα.</div>
+        </section>
+
+        <section class="panel">
+            <h2>Γονείς</h2>
+            <div class="parents">
+                <div>
+                    <h3>Γονέας 1</h3>
+                    <label for="parent1Sex">Φύλο</label>
+                    <select id="parent1Sex">
+                        <option value="">Δεν έχει σημασία</option>
+                        <option value="male">Αρσενικό</option>
+                        <option value="female">Θηλυκό</option>
+                    </select>
+                    <label for="fatherGenotype">Γονότυπος</label>
+                    <select id="fatherGenotype"></select>
+                </div>
+
+                <div>
+                    <h3>Γονέας 2</h3>
+                    <label for="parent2Sex">Φύλο</label>
+                    <select id="parent2Sex">
+                        <option value="">Δεν έχει σημασία</option>
+                        <option value="male">Αρσενικό</option>
+                        <option value="female">Θηλυκό</option>
+                    </select>
+                    <label for="motherGenotype">Γονότυπος</label>
+                    <select id="motherGenotype"></select>
+                </div>
+            </div>
+            <button id="crossButton" type="button">Εκτέλεση διασταύρωσης</button>
+        </section>
+
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- ΔΙΫΒΡΙΔΙΣΜΟΣ -->
+    <!-- ===================================================== -->
+    <section id="dihybridPanel" class="mode-panel" style="display:none;">
+
+        <section class="panel">
+            <h2>Διϋβριδική διασταύρωση</h2>
+            <p>Επιλέξτε δύο διαφορετικά traits για να μελετήσετε την ταυτόχρονη κληρονόμησή τους.</p>
+
+            <div class="dihybrid-traits">
+                <div>
+                    <label for="dihybridTrait1">Trait 1</label>
+                    <select id="dihybridTrait1">
+                        <option value="">-- Επιλέξτε Trait 1 --</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="dihybridTrait2">Trait 2</label>
+                    <select id="dihybridTrait2">
+                        <option value="">-- Επιλέξτε Trait 2 --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="dihybrid-parent">
+                <h3>Γονέας 1</h3>
+                <div>
+                    <div>
+                        <label for="parent1DihybridGenotype1">Γονότυπος για Trait 1</label>
+                        <select id="parent1DihybridGenotype1"></select>
+                    </div>
+                    <div>
+                        <label for="parent1DihybridGenotype2">Γονότυπος για Trait 2</label>
+                        <select id="parent1DihybridGenotype2"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dihybrid-parent">
+                <h3>Γονέας 2</h3>
+                <div>
+                    <div>
+                        <label for="parent2DihybridGenotype1">Γονότυπος για Trait 1</label>
+                        <select id="parent2DihybridGenotype1"></select>
+                    </div>
+                    <div>
+                        <label for="parent2DihybridGenotype2">Γονότυπος για Trait 2</label>
+                        <select id="parent2DihybridGenotype2"></select>
+                    </div>
+                </div>
+            </div>
+
+            <button id="dihybridCrossButton" type="button">Εκτέλεση διϋβριδικής διασταύρωσης</button>
+        </section>
+
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- ΕΝΙΑΙΑ ΑΠΟΤΕΛΕΣΜΑΤΑ -->
+    <!-- ===================================================== -->
+    <section id="resultsPanel" class="results-panel panel" style="display:none;">
+        <div class="results-header">
+            <h2 id="resultsTitle">Αποτελέσματα</h2>
+            <p>Τα αποτελέσματα της διασταύρωσης που εκτελέστηκε.</p>
+        </div>
+
+        <!-- Αποτελέσματα μονοϋβριδισμού -->
+        <div id="monohybridResultsPanel">
+
+            <section class="result-card">
+                <h3>Γαμέτες</h3>
+                <div class="gametes">
+                    <div>
+                        <h4>Γονέας 1</h4>
+                        <div id="fatherGametes">-</div>
+                    </div>
+                    <div>
+                        <h4>Γονέας 2</h4>
+                        <div id="motherGametes">-</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="result-card">
+                <h3>Τετράγωνο Punnett</h3>
+                <div id="punnettContainer"></div>
+            </section>
+
+            <section class="result-card">
+                <h3>Γονοτυπικές Αναλογίες</h3>
+                <div class="table-container">
+                    <table id="genotypeTable">
+                        <thead>
+                            <tr>
+                                <th>Γονότυπος</th>
+                                <th>Πλήθος</th>
+                                <th>Πιθανότητα</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="result-card">
+                <h3>Φαινοτυπικές Αναλογίες</h3>
+                <div class="table-container">
+                    <table id="phenotypeTable">
+                        <thead>
+                            <tr>
+                                <th>Φαινότυπος</th>
+                                <th>Πλήθος</th>
+                                <th>Πιθανότητα</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="result-card">
+                <h3>Συμπέρασμα</h3>
+                <div id="summary">Δεν υπάρχουν ακόμη αποτελέσματα.</div>
+            </section>
+
+        </div>
+
+        <!-- Αποτελέσματα διϋβριδισμού -->
+        <div id="dihybridResultsPanel" style="display:none;">
+
+            <section class="result-card">
+                <h3>Γαμέτες</h3>
+                <div class="gametes">
+                    <div>
+                        <h4>Γονέας 1</h4>
+                        <div id="parent1DihybridGametes">-</div>
+                    </div>
+                    <div>
+                        <h4>Γονέας 2</h4>
+                        <div id="parent2DihybridGametes">-</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="result-card">
+                <h3>Τετράγωνο Punnett</h3>
+                <div id="dihybridPunnettContainer"></div>
+            </section>
+
+            <section class="result-card">
+                <h3>Γονοτυπικές Αναλογίες</h3>
+                <div class="table-container">
+                    <table id="dihybridGenotypeTable">
+                        <thead>
+                            <tr>
+                                <th>Γονότυπος</th>
+                                <th>Πλήθος</th>
+                                <th>Πιθανότητα</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="result-card">
+                <h3>Φαινοτυπικές Αναλογίες</h3>
+                <div class="table-container">
+                    <table id="dihybridPhenotypeTable">
+                        <thead>
+                            <tr>
+                                <th>Φαινότυπος</th>
+                                <th>Πλήθος</th>
+                                <th>Πιθανότητα</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="result-card">
+                <h3>Συμπέρασμα</h3>
+                <div id="dihybridSummary">Δεν υπάρχουν ακόμη αποτελέσματα.</div>
+            </section>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Virtual Genetics Lab<br>
+    Open Educational Resource (OER)<br>
+    Version 0.1
+</footer>
+
+<script src="data/traits.js"></script>
+<script src="js/genetics.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
